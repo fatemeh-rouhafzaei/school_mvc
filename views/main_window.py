@@ -10,6 +10,8 @@ from views.student_view.student_list_view import StudentListView
 from controllers.student_controller.student_form_controller import StudentFormController
 from controllers.student_controller.student_list_controller import StudentListController
 
+from views.class_view.class_checkBox_view import ClassCheckBoxView
+from controllers.class_controller.class_checkBox_controller import ClassCheckBoxController
 from models.student_model import StudentModel
 from models.class_model import ClassModel
 from db.db_connection import Database
@@ -36,6 +38,7 @@ class MainWindow(ttk.Window):
 
         ttk.Button(self.navbar, text="ثبت دانش آموز" , command= self.show_student_form).pack(side=RIGHT , padx=1)
         ttk.Button(self.navbar, text=" دانش آموزان" , command= self.show_student_list).pack(side=RIGHT , padx=1)
+        ttk.Button(self.navbar, text="  انتخاب درس" , command= self.show_select_class).pack(side=RIGHT , padx=1)
 
         self.content = ttk.Frame(self)
         self.content.pack(fill=BOTH)
@@ -61,6 +64,11 @@ class MainWindow(ttk.Window):
         self._clear_content()
         view = StudentListView(self.content)
         StudentListController(self.student_model , view)
+    
+    def show_select_class(self):
+        self._clear_content()
+        view = ClassCheckBoxView(self.content)
+        ClassCheckBoxController(self.class_model , view)
 
     def _clear_content(self):
         for widget in self.content.winfo_children():
