@@ -19,9 +19,11 @@ class StudentFormView(ttk.Frame):
         self.name_entry.grid(column=0, row=0, sticky= EW, padx=2, pady=5)
         self.name_label = ttk.Label(self, text="نام ").grid(column=1, row=0, sticky= E, padx=10, pady=5)
 
+        # start national code ui
         self.national_code_entry = ttk.Entry(self)
         self.national_code_entry.grid(column=0, row=1, sticky= EW, padx=2, pady=5)
         ttk.Label(self, text="کد ملی").grid(column=1, row=1, sticky= E, padx=10, pady=5)
+        # end national code ui
 
         self.mobile_entry = ttk.Entry(self)
         self.mobile_entry.grid(column=0, row=2, sticky= EW, padx=2, pady=5)
