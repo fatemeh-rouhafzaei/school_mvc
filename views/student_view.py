@@ -2,8 +2,8 @@ import ttkbootstrap as ttk
 from ttkbootstrap.dialogs import Messagebox
 
 class studentView(ttk.Frame):
-    def __init__(self, master, controller):
-        super().__init__(master)
+    def init(self, master, controller):
+        super().init(master)
         self.controller = controller
         self.pack(fill="both", expand=True)
         self.create_widgets()
@@ -15,15 +15,23 @@ class studentView(ttk.Frame):
         self.capacity_entry = ttk.Entry(self)
         self.capacity_entry.pack(pady=5)
 
-        add_btn = ttk.Button(self,text="افزودن دانش آموز", command=self.add_student)
+        self.grade_entry = ttk.Entry(self)
+        self.grade_entry.pack(pady=5)
+
+        self.field_entry = ttk.Entry(self)
+        self.field_entry.pack(pady=5)
+
+        add_btn = ttk.Button(self, text="افزودن دانش آموز", command=self.add_student)
         add_btn.pack(pady=5)
 
-        self.student_list = ttk.Treeview(self, columns=("id", "name","nationa_code" ,"password" , "mobile"), show="headings")
+        self.student_list = ttk.Treeview(self, columns=("id", "name", "nationa_code", "password", "mobile", "grade_level", "field_of_study"), show="headings")
         self.student_list.heading("id", text="ID")
         self.student_list.heading("name", text="نام کلاس")
         self.student_list.heading("nationa_code", text="کد ملی")
         self.student_list.heading("password", text="رمز عبور")
         self.student_list.heading("mobile", text="شماره همراه")
+        self.student_list.heading("grade_level", text="پایه تحصیلی")
+        self.student_list.heading("field_of_study", text="رشته تحصیلی")
 
         self.student_list.pack(fill="both", expand=True)
 
@@ -31,9 +39,11 @@ class studentView(ttk.Frame):
 
     def add_student(self):
         name = self.name_entry.get()
+        grade = self.grade_entry.get()
+        field = self.field_entry.get()
         try:
             capacity = int(self.capacity_entry.get())
-            self.controller.create_student(name, capacity)
+            self.controller.create_student(name, capacity, grade, field)
             self.refresh_student_list()
         except Exception as e:
             Messagebox.show_error(title="خطا", message=str(e))
