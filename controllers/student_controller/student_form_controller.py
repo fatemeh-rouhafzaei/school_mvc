@@ -2,7 +2,7 @@ from messages.errors import ErrorMessages
 from tkinter import messagebox
 
 class StudentFormController:
-    def __init__(self, model , view):
+    def init(self, model, view):
         self.model = model
         self.view = view
         self.view.save_button.config(command=self.save_form)
@@ -10,11 +10,10 @@ class StudentFormController:
     def save_form(self):
         try:
             data = self.view.get_student_form()
-            self.model.add_student(data["name"], data["national_code"], data["mobile"], data["password"])
+            self.model.add_student(data["name"],data["national_code"],data["mobile"],data["password"],data["grade_level"],data["field_of_study"])
             messagebox.showinfo("موفقیت", "دانش‌آموز با موفقیت ثبت شد.")
         except Exception as e:
             messagebox.showerror("خطا", f"ثبت‌نام انجام نشد: {e}")
-
 
     def get_students(self):
         return self.model.get_all_students()
